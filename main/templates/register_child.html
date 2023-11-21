@@ -1,0 +1,13 @@
+{% block content %}
+  <h2>CHILD REGISTRATION FORM</h2>
+  <form method="POST">
+    {% csrf_token %}
+    <label for="first_name">First Name:</label>
+    <input type="last_name" name="email" required>
+    <br>
+    <label for="password">Password:</label>
+    <input type="password" name="password" required>
+    <br>
+    <button type="submit">Login</button>
+  </form>
+{% endblock content %}
