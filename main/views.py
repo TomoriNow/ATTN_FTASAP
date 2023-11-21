@@ -41,6 +41,7 @@ def register_admin(request):
         if form.is_valid():
             user = form.save(commit=False)
             user.is_superuser = True  # Set the user as a superuser
+            user.is_staff = True
             user.save()
             messages.success(request, 'Your account has been successfully created!')
             return redirect('main:login_user')
