@@ -6,6 +6,9 @@ from django.contrib import messages
 from main.forms import CustomUserCreationForm
 import datetime
 
+def main(request):
+    return render(request, 'main.html', {})
+
 def login_user(request):
     if request.method == 'POST':
         email = request.POST.get('email')
