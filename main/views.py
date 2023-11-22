@@ -70,10 +70,10 @@ def register_staff(request):
             staff.save()
             messages.success(request, 'Your account has been successfully created!')
             return redirect('main:login_user')
-        else:
-            form = CustomUserCreationForm()
-            form2 = AccountUserCreation()
-            form3 = StaffUserCreation()
+    else:
+        form = CustomUserCreationForm()
+        form2 = AccountUserCreation()
+        form3 = StaffUserCreation()
 
     context = {'form': form, 'form2':form2, 'form3':form3}
     return render(request, 'register_admin.html', context)
