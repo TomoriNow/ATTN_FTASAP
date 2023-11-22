@@ -115,7 +115,15 @@ def dashboard(request):
 
 def register_driver(request):
     return render(request, 'register_driver.html', {})
-    
+
+def register_caregiver(request):
+    return render(request, 'register_caregiver.html', {})
+
+def daily_report_child(request):
+    return render(request, 'daily_report_child.html', {})
+
+def child_list(request):
+    return render(request, 'child_list.html', {})
             
         
         

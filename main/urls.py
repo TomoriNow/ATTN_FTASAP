@@ -1,5 +1,5 @@
 from django.urls import path
-from main.views import show_main, login_user, register_admin, register, register_staff, dashboard, register_child, register_driver
+from main.views import show_main, login_user, register_admin, register, register_staff, dashboard, register_child, register_driver, daily_report_child, child_list, register_caregiver
 
 app_name = 'main'  # Set the app namespace if necessary
 
@@ -11,5 +11,8 @@ urlpatterns = [
     path('register/staff/', register_staff, name='register_staff'),
     path('register/child/', register_child, name='register_child'),
     path('register/driver/', register_driver, name='register_driver'),
+    path('register/caregiver/', register_caregiver, name='register_caregiver'),
+    path('dailyreport/', daily_report_child, name = "daily_report_child"),
+    path('childlist/', child_list, name = "child_list"),
     path('dashboard/', dashboard, name = 'dashboard')
 ]

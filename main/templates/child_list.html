@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+<table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th>Child Name</th>
+        <th>Age</th>
+        <th>Birthday</th>
+        <th>Latest Class Name</th>
+        <th>Phone Number</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Michael Tom</td>
+        <td>5</td>
+        <td>2018-05-15</td>
+        <td>Kindergarten-A</td>
+        <td>678-9123-4567</td>
+      </tr>
+      <tr>
+        <td>Jane Smith</td>
+        <td>4</td>
+        <td>2019-02-28</td>
+        <td>Kindergarten1-B</td>
+        <td>432-1987-6543</td>
+      </tr>
+      <tr>
+        <td>Alex Johnson</td>
+        <td>3</td>
+        <td>2020-09-10</td>
+        <td>Toddler-C</td>
+        <td>891-234-5678</td>
+      </tr>
+    </tbody>
+  </table>
+<div style="margin-top: 20px; text-align: center;">
+    <a href="{% url 'main:dashboard' %}" ><button>Back</button></a>
+</div>
+  {% endblock content %}
