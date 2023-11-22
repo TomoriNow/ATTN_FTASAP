@@ -10,6 +10,13 @@ class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model = User
         fields = UserCreationForm.Meta.fields
+
+class CustomUserCreationForm2(UserCreationForm):
+    username = forms.CharField(label="Parent's Phone Number", max_length=30, required=True)
+
+    class Meta:
+        model = User
+        fields = UserCreationForm.Meta.fields
         
 class AccountUserCreation(ModelForm):
     class Meta:

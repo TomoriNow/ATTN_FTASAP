@@ -4,9 +4,12 @@
     {% csrf_token %}
     {{ form.as_p }}
     {{ form2.as_p }}
+    <div>
     {{ form3.as_p }}
-    <button type="submit">Register</button>
+    </div>
+    <button type="submit">Register</button> <a href="{% url 'main:register' %}" >
   </form>
+  <a href="{% url 'main:register' %}" ><button>Back</button></a>
   {% if messages %}
   <ul>
       {% for message in messages %}

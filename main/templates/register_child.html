@@ -5,8 +5,9 @@
     {{ form.as_p }}
     {{ form2.as_p }}
     {{ form3.as_p }}
-    <button type="submit">Register</button>
+    <button type="submit">Register</button> 
   </form>
+  <a href="{% url 'main:register' %}" ><button>Back</button></a>
   {% if messages %}
   <ul>
       {% for message in messages %}

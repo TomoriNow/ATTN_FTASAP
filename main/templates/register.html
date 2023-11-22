@@ -1,6 +1,7 @@
 {% block content %}
 <div id="login-register-buttons" style="margin-top: 20px; text-align: center;">
-    <a href="{% url 'main:register_admin' %}" ><button style="padding: 10px; margin: 5px;">Admin</button></a>
-    <a href="{% url 'main:register_child' %}" ><button style="padding: 10px; margin: 5px;">Child</button></a>
+    <a href="{% url 'main:register_admin' %}" ><button style="padding: 10px; margin: 5px;">Admin</button></a><br>
+    <a href="{% url 'main:register_child' %}" ><button style="padding: 10px; margin: 5px;">Child</button></a><br>
+    <a href="{% url 'main:register_driver' %}" ><button style="padding: 10px; margin: 5px;">Driver</button></a>
 </div>
 {% endblock %}

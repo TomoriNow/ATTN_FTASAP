@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
-from main.forms import CustomUserCreationForm, AccountUserCreation, StaffUserCreation, ChildUserCreation
+from main.forms import CustomUserCreationForm, AccountUserCreation, StaffUserCreation, ChildUserCreation, CustomUserCreationForm2
 from main.models import AccountUser
 from django.contrib import messages
 import datetime
@@ -81,7 +81,7 @@ def register_staff(request):
 
 def register_child(request):
     if request.method == "POST":
-        form = CustomUserCreationForm(request.POST)
+        form = CustomUserCreationForm2(request.POST)
         form2 = AccountUserCreation(request.POST)
         form3 = ChildUserCreation(request.POST)
         
@@ -98,7 +98,7 @@ def register_child(request):
             messages.success(request, 'Your account has been successfully created!')
             return redirect('main:login_user')
     else:
-        form = CustomUserCreationForm()
+        form = CustomUserCreationForm2()
         form2 = AccountUserCreation()
         form3 = ChildUserCreation()
 
@@ -112,6 +112,9 @@ def dashboard(request):
     account = AccountUser.objects.get(user = request.user)
     if account.is_child:
         return render(request, 'child_dashboard.html', {})
+
+def register_driver(request):
+    return render(request, 'register_driver.html', {})
     
             
         

@@ -3,6 +3,13 @@
   <form method="POST">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Register</button>
+    <button type="submit">Register</button> 
   </form>
+  <a href="{% url 'main:register' %}" ><button>Back</button></a>
+  {% if messages %}
+  <ul>
+      {% for message in messages %}
+          <li>{{ message }}</li>
+      {% endfor %}
+  </ul>
 {% endblock %}
