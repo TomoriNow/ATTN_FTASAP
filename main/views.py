@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
-from main.forms import CustomUserCreationForm
+from main.forms import CustomUserCreationForm, AccountUserCreation, StaffUserCreation
 from django.contrib import messages
 import datetime
 
@@ -50,3 +50,33 @@ def register_admin(request):
 
     context = {'form': form}
     return render(request, 'register_admin.html', context)
+
+def register_staff(request):
+    if request.method == "POST":
+        form = CustomUserCreationForm(request.POST)
+        form2 = AccountUserCreation(request.POST)
+        form3 = StaffUserCreation(request.POST)
+        
+        if form.is_valid() and form2.is_valid() and form3.is_valid():
+            user = form.save(commit=False)
+            user.is_staff=True
+            user.save()
+            account = form2.save(commit=False)
+            account.user=user
+            account.is_staff=True
+            account.save()
+            staff = form3.save(commit=False)
+            staff.user = account
+            staff.save()
+            messages.success(request, 'Your account has been successfully created!')
+            return redirect('main:login_user')
+        else:
+            form = CustomUserCreationForm()
+            form2 = AccountUserCreation()
+            form3 = StaffUserCreation()
+
+    context = {'form': form, 'form2':form2, 'form3':form3}
+    return render(request, 'register_admin.html', context)
+            
+        
+        
