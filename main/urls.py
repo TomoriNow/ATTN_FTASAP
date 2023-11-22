@@ -11,5 +11,5 @@ urlpatterns = [
     path('register/staff/', register_staff, name='register_staff'),
     path('register/child/', register_child, name='register_child'),
     path('register/driver/', register_driver, name='register_driver'),
-    path('dashboard', dashboard, name = 'dashboard')
+    path('dashboard/', dashboard, name = 'dashboard')
 ]
