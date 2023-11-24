@@ -112,9 +112,32 @@ def dashboard(request):
     account = AccountUser.objects.get(user = request.user)
     if account.is_child:
         return render(request, 'child_dashboard.html', {})
+    if account.is_staff:
+        return render(request, 'driver_dashboard.html', {})
 
 def register_driver(request):
-    return render(request, 'register_driver.html', {})
+    if request.method == "POST":
+        form = CustomUserCreationForm2(request.POST)
+        form2 = AccountUserCreation(request.POST)
+        form3 = StaffUserCreation(request.POST)
+    if form.is_valid() and form2.is_valid() and form3.is_valid():
+            user = form.save(commit=False)
+            user.save()
+            account = form2.save(commit=False)
+            account.user=user
+            account.is_staff=True
+            account.save()
+            staff = form3.save(commit=False)
+            staff.user = account
+            staff.save()
+            messages.success(request, 'Your account has been successfully created!')
+            return redirect('main:login_user')
+    else:
+        form = CustomUserCreationForm()
+        form2 = AccountUserCreation()
+        form3 = StaffUserCreation()
+    context = {'form': form, 'form2':form2, 'form3':form3}
+    return render(request, 'register_driver.html', context)
 
 def register_caregiver(request):
     return render(request, 'register_caregiver.html', {})

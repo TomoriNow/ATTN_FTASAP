@@ -1,5 +1,6 @@
 <body><h2>Register</h2>
     <form method="POST">
+      {% csrf_token %}
       <input type="hidden" name="csrfmiddlewaretoken" value="AHNALH8a2CTjlENXy5dy39qBSw6YERMcFkK21ynBYK3cDfZQQdtUIZz4UcfAX8RJ">
       <p>
       <label for="id_username">Phone Number:</label>

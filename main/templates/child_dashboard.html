@@ -1,1 +1,16 @@
-<h1>CHILD DASHBOARD</h1>
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="text-center">CHILD DASHBOARD</h1>
+{% include 'navbar.html'%}
+
+<ul>
+    <li><h5>Name: Canon Curry</h5></li>
+    <li><h5>Registered Phone Number: 085924247362</h5></li>
+    <li><h5>Address: San Francisco</h5></li>
+    <li><h5>Gender: Male</h5></li>
+    <li><h5>Date of Birth: 08/08/2013</h5></li>
+    <li><h5>Dad Name: Stephen Curry</h5></li>
+    <li><h5>Mom Name: Ayesha Curry</h5></li>
+</ul>
+
+{% endblock content %}
