@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block content %}
+<body><h2>Add Activity Schedule</h2>
+    <p>
+        <label for="id_activity">Activity Name:</label>
+        <select name="activity" required="" id="id_activity">
+      <option value="" selected="">---------</option>
+    
+      <option value="Playtime">Playtime</option>
+
+      <option value="Arts and Crafts">Arts and Crafts</option>
+
+      <option value="Storytim">Storytime</option>
+
+      <option value="Napping">Napping</option>
+
+      <option value="Music">Music</option>
+
+      <option value="Math">Math</option>
+    
+    </select>
+        
+      </p>
+      <p>
+        <label for="id_day">Day:</label>
+        <input type="text" name="day" maxlength="50" required="" id="id_day">
+        
+        
+      </p>
+      <p>
+        <label for="id_startHour">Start Hour:</label>
+        <input type="text" name="startHour" maxlength="50" required="" id="id_startHour">
+        
+        
+      </p>
+
+      <p>
+        <label for="id_endHour">End Hour:</label>
+        <input type="text" name="endHour" maxlength="50" required="" id="id_endHour">
+        
+        
+      </p>
+
+      <div style="margin-top: 20px; text-align: center;">
+        <a href="{% url 'main:offered_program_detail' %}" ><button>Save</button></a>
+      </div>
+
+
+</body>
+{% endblock content %}

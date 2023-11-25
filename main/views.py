@@ -120,7 +120,7 @@ def register_driver(request):
         form = CustomUserCreationForm2(request.POST)
         form2 = AccountUserCreation(request.POST)
         form3 = StaffUserCreation(request.POST)
-    if form.is_valid() and form2.is_valid() and form3.is_valid():
+        if form.is_valid() and form2.is_valid() and form3.is_valid():
             user = form.save(commit=False)
             user.save()
             account = form2.save(commit=False)
@@ -147,6 +147,21 @@ def daily_report_child(request):
 
 def child_list(request):
     return render(request, 'child_list.html', {})
-            
+
+def new_activity_schedule(request):
+    return render(request, 'new_activity_schedule.html', {})
+
+def new_menu_schedule(request):
+    return render(request, 'new_menu_schedule.html', {})
+
+def new_offered_program(request):
+    return render(request, 'new_offered_program.html', {})
+
+def offered_program_detail(request):
+    return render(request, 'offered_program_detail.html', {})
+
+def offered_program(request):
+    return render(request, 'offered_program.html', {})
+
         
         

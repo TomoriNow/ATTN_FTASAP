@@ -1,5 +1,5 @@
 {% block content %}
-  <h2>Register</h2>
+  <h2>Admin Registration Form</h2>
   <form method="POST">
     {% csrf_token %}
     {{ form.as_p }}
@@ -12,4 +12,5 @@
           <li>{{ message }}</li>
       {% endfor %}
   </ul>
-{% endblock %}
+  {% endif %} 
+  {% endblock content %}

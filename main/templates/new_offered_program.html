@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+<body><h2>Offer New Program</h2>
+    <p>
+        <label for="id_program">Select Program:</label>
+        <select name="program" required="" id="id_program">
+      <option value="" selected="">---------</option>
+    
+      <option value="Preschool 1">Preschool 1</option>
+    
+      <option value="Kindergarten 2">Kindergarten 2</option>
+
+      <option value="Kindergarten 3">Kindergarten 3</option>
+
+      <option value="Nursery">Nursery</option>
+    
+    </select>
+        
+      </p>
+      <p>
+        <label for="id_monthlyFee">Monthly Fee:</label>
+        <input type="number" name="monthlyFee" min = "1" required="" id="id_monthlyFee">
+        
+        
+      </p>
+      <p>
+        <label for="id_dailyFee">Daily Fee:</label>
+        <input type="number" name="dailyFee" min = "1" required="" id="id_dailyFee">
+        
+        
+      </p>
+
+      <div style="margin-top: 20px; text-align: center;">
+        <a href="{% url 'main:offered_program' %}" ><button>Save</button></a>
+      </div>
+
+
+</body>
+{% endblock content %}

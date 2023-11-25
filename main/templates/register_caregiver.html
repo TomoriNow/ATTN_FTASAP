@@ -1,4 +1,4 @@
-<body><h2>Register</h2>
+<body><h2>Caregiver Registration Form</h2>
     <form method="POST">
       <input type="hidden" name="csrfmiddlewaretoken" value="AHNALH8a2CTjlENXy5dy39qBSw6YERMcFkK21ynBYK3cDfZQQdtUIZz4UcfAX8RJ">
       <p>
@@ -110,11 +110,12 @@
       </p>
       <p>
       <label for="id_numberOfCertificates">Number of Certificates:</label>
-      <input type="number" name="numberOfCertificates" min = "1" required="" id="id_numberOfCertificates">
+      <input type="number" name="numberOfCertificates" min = "1" value="1" required="" id="id_numberOfCertificates">
       
       
     </p>
-    <div>
+    <div id = "originalElements">
+        <br>
     <p>
         <label for="id_certificateName">Certificate Name:</label>
         <input type="text" name="certificateName" maxlength="20" required="" id="id_certificateName">
@@ -189,8 +190,37 @@
         
       </p>
     </div>
+
+    <div id="duplicateContainer"></div>
       <button type="submit">Register</button>
     </form>
     <a href="{% url 'main:register' %}" ><button>Back</button></a>
      
   </body>
+  <script>
+    function duplicateElements() {
+      // Get the number of copies from the input field
+      var numberOfCopies = document.getElementById('id_numberOfCertificates').value;
+  
+      // Clear previous duplicates
+      document.getElementById('duplicateContainer').innerHTML = '';
+  
+      // Loop to create the specified number of copies
+      for (var i = 1; i < numberOfCopies; i++) {
+        // Clone the original element
+        var originalElement = document.getElementById('originalElements');
+        var clone = originalElement.cloneNode(true);
+  
+        // Update IDs to make them unique
+        clone.querySelector('[id="id_certificateName"]').id = 'id_certificateName_' + i;
+        clone.querySelector('[id="id_certificateNumber"]').id = 'id_certificateNumber_' + i;
+        clone.querySelector('[id="yearSelector"]').id = 'yearSelector_' + i;
+        clone.querySelector('[id="id_certificateOrganizer"]').id = 'id_certificateOrganizer_' + i;
+  
+        // Append the cloned element to the container
+        document.getElementById('duplicateContainer').appendChild(clone);
+      }
+    }
+
+    document.getElementById('id_numberOfCertificates').addEventListener('input', duplicateElements);
+  </script>

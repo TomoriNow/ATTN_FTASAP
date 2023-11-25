@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>2023 Kindergarten 1's Details</h2>
+<br>
+<p style="font-weight: bold;">Activity Schedule:</p>
+<a href="{% url 'main:new_activity_schedule' %}" ><button>Add New Activity</button></a>
+<table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th>Activity Name</th>
+        <th>Day</th>
+        <th>Time</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Arts and Crafts</td>
+        <td>Monday</td>
+        <td>10:00 AM - 11:00 AM</td>
+      </tr>
+      <tr>
+        <td>Storytime</td>
+        <td>Wednesday</td>
+        <td>3:00 PM - 4:00 PM</td>
+      </tr>
+      <tr>
+        <td>Playtime</td>
+        <td>Friday</td>
+        <td>2:30 PM - 4:00 PM</td>
+      </tr>
+    </tbody>
+  </table>
+<br>
+<p style="font-weight: bold;">Menu Schedule:</p>
+<a href="{% url 'main:new_menu_schedule' %}" ><button>Add New Menu</button></a>
+<table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th>Menu Name</th>
+        <th>Day</th>
+        <th>Time</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Apple</td>
+        <td>Monday</td>
+        <td>Morning Snack: 10:00 AM - 10:30 AM</td>
+      </tr>
+      <tr>
+        <td>Peanut Butter and Jelly Sandwich</td>
+        <td>Wednesday</td>
+        <td>Lunch: 12:00 PM - 1:00 PM</td>
+      </tr>
+      <tr>
+        <td>Yoghurt</td>
+        <td>Friday</td>
+        <td>Afternoon Snack: 3:30 PM - 4:00 PM</td>
+      </tr>
+    </tbody>
+  </table>
+  <div style="margin-top: 20px; text-align: center;">
+    <a href="{% url 'main:offered_program' %}" ><button>Back</button></a>
+  </div>
+{% endblock content %}
