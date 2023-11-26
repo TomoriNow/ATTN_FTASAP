@@ -166,6 +166,9 @@ def offered_program(request):
 def crud_extracurricular(request):
     return render(request, 'crud_extracurricular.html', {})
 
+def activity(request):
+    return render(request, 'activity.html', {})
+
 def extracurricular_detail(request):
     return render(request, 'extracurricular_detail.html', {})
 
