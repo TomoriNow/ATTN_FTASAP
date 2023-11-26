@@ -163,5 +163,22 @@ def offered_program_detail(request):
 def offered_program(request):
     return render(request, 'offered_program.html', {})
 
-        
+def crud_extracurricular(request):
+    return render(request, 'crud_extracurricular.html', {})
+
+def extracurricular_detail(request):
+    return render(request, 'extracurricular_detail.html', {})
+
+
+def add_extracurricular(request):
+    return render(request, 'extracurricular_form.html', {})
+
+def update_extracurricular(request):
+    return render(request, 'update_extracurricular.html', {})
+
+def child_payment(request):
+    return render(request, 'child_payment.html', {})
+    
+def payment_history(request):
+    return render(request, 'payment_history.html', {})
         

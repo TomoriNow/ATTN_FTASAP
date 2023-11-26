@@ -1,6 +1,7 @@
 from django.urls import path
 from main.views import show_main, login_user, register_admin, register, register_staff, dashboard, register_child, register_driver, daily_report_child, child_list, register_caregiver
-from main.views import new_activity_schedule, new_menu_schedule, new_offered_program, offered_program, offered_program_detail
+from main.views import new_activity_schedule, new_menu_schedule, new_offered_program, offered_program, offered_program_detail, extracurricular_detail, add_extracurricular, update_extracurricular
+from main.views import child_payment, crud_extracurricular, payment_history
 
 app_name = 'main'  # Set the app namespace if necessary
 
@@ -21,4 +22,10 @@ urlpatterns = [
     path('new-offered-program/', new_offered_program, name = 'new_offered_program'),
     path('offered-program/', offered_program, name = 'offered_program'),
     path('offered-program/1', offered_program_detail, name = 'offered_program_detail'),
+    path('crud_extracurricular/', crud_extracurricular, name = 'crud_extracurricular'),
+    path('extracurricular_detail/', extracurricular_detail, name = 'extracurricular_detail'),
+    path('add_extracurricular/', add_extracurricular, name = 'add_extracurricular'),
+    path('update_extracurricular/', update_extracurricular, name = 'update_extracurricular'),
+    path('child_payment/', child_payment, name = 'child_payment'),
+    path('payment_history/', payment_history, name = 'payment_history'),
 ]

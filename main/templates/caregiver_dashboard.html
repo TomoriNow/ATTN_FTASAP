@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="text-center">CAREGIVER DASHBOARD</h1>
+{% include 'navbar.html'%}
+<ul>
+    <li><h5>Name: Suster Ngesot</h5></li>
+    <li><h5>Registered Phone Number: 085928287362</h5></li>
+    <li><h5>Address: Indonesia</h5></li>
+    <li><h5>Gender: Female</h5></li>
+    <li><h5>Date of Birth: 1993-08-18 22:33:13</h5></li>
+    <li><h5>NIK: 1106130104090001</h5></li>
+    <li><h5>NPWP: 39.532.715.8-000.000</h5></li>
+    <li><h5>Bank Name: Pacific Coast Bank</h5></li>
+    <li><h5>Bank Account Number: 327715834</h5></li>
+    <li><h5>Certificates: </h5>
+        <table  class="table table-bordered table-striped table-hover mt-5 text-center" style="width: 80%;">
+            <thead>
+                <th>Certificate Name</th>
+                <th>Certificate Number</th>
+                <th>Certificate Year</th>
+                <th>Certificate Organizer</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Childcare</td>
+                    <td>12345678</td>
+                    <td>2021</td>
+                    <td>OBN</td>
+                </tr>
+                <tr>
+                    <td>Specialized Care</td>
+                    <td>21436587</td>
+                    <td>2021</td>
+                    <td>KDD</td>
+                </tr>
+            </tbody>
+        </table>
+    </li>
+</ul>
+
+{% endblock content %}
