@@ -1,12 +1,14 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>Activity</h1>
+<h1>Manage Extracurricular</h1>
 <!-- CRD Extracurricular Taking-->
 <a href="{% url 'main:create_activity' %}"><button>[Add New Activity]</button></a>
 <div class="d-flex align-items-center justify-content-center">
     <table class="table table-bordered table-striped table-hover mt-5 text-center" style="width: 100%;">
         <tbody>
-            <th>Activity Name</th>
+            <th>Name</th>
+            <th>Day</th>
+            <th>Hour</th>
             <th>Operation</th>
             <tr>
                 
