@@ -88,10 +88,12 @@ def register_child(request):
         if form.is_valid() and form2.is_valid() and form3.is_valid():
             user = form.save(commit=False)
             user.save()
+            
             account = form2.save(commit=False)
             account.user=user
             account.is_child=True
             account.save()
+            
             staff = form3.save(commit=False)
             staff.user = account
             staff.save()
@@ -166,6 +168,9 @@ def offered_program(request):
 def crud_extracurricular(request):
     return render(request, 'crud_extracurricular.html', {})
 
+def activity(request):
+    return render(request, 'activity.html', {})
+
 def extracurricular_detail(request):
     return render(request, 'extracurricular_detail.html', {})
 
@@ -181,4 +186,15 @@ def child_payment(request):
     
 def payment_history(request):
     return render(request, 'payment_history.html', {})
+
+def create_activity(request):
+    return render(request, 'create_activity.html', {})
+
+def update_activity(request):
+    return render(request, 'update_activity.html', {})
+
+def display_dad_name(request, dadName):
+    # You can use dadName in the template or perform any other logic
+    context = {'dadName': dadName}
+    return render(request, 'display_dad_name.html', context)
         
