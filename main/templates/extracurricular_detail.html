@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- Note that the model and form for Extracurricular have not been made yet for Group Assignment 2!-->
+<h1 class="text-center">EXTRACURRICULAR DETAIL</h1>
+
+<ul>
+    <li><h5>Extracurricular Name : Basketball</h5></li>
+    <li><h5>Extracurricular Day : Monday</h5></li>
+    <li><h5>Extracurricular Hour : 3</h5></li>
+</ul>
+
+<h3>Participant:</h3>
+<div class="d-flex align-items-center justify-content-center">
+    <table class="table table-bordered table-striped table-hover mt-5 text-center" style="width: 80%;">
+        <thead>
+            <th>Name</th>
+            <th>Class Name</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Canon Curry</td>
+                <td>Mango</td>
+            </tr>
+            
+            <tr>
+                <td>Chae Won</td>
+                <td>ABC</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div style="margin-top: 20px; text-align: center;">
+    <a href="{% url 'main:crud_extracurricular' %}" ><button>Back</button></a>
+</div>
+{% endblock content %}

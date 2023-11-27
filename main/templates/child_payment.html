@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- Note that the model and form for Child Payment and Payment History have not been made yet for Group Assignment 2!-->
+<h1 class="text-center">PAYMENT FORM</h1>
+<form method="POST">
+    <div class="mb-3">
+        <label for="id_paymentDate" class="form-label">Payment Date: </label>
+        <input type="date" class="form-control" id="id_paymentDate" required="" name="paymentDate">
+    </div>
+    <div class="mb-3">
+        <label for="paymentType" class="form-label">Type: </label>
+        <select class="form-select" required> 
+            <option selected>Pick type of payment</option>
+            <option value="daily">daily</option>
+            <option value="monthly">monthly</option>
+            <option value="fine">fine</option>
+            <option value="excursion">excursion</option>
+        </select>
+        <div class="invalid-feedback">
+            Please select a valid date.
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="paymentAmount" class="form-label">Amount: </label>
+        <input type="number" class="form-control" required>
+        <div class="invalid-feedback">
+            Please pay the expected payment: <p>[Expected Payment Here]</p>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center">
+        <button type="submit" class="btn btn-primary" value="Pay For Child">PAY</button>
+    </div>
+</form>
+
+
+{% endblock content %}
