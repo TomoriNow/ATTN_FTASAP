@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>Manage Extracurricular</h1>
+<h1 class="text-center">Manage Extracurricular</h1>
 <!-- CRD Extracurricular Taking-->
-<a href="{% url 'main:create_activity' %}"><button>[Add New Activity]</button></a>
+<h3> My Extracurricular: </h3>
 <div class="d-flex align-items-center justify-content-center">
     <table class="table table-bordered table-striped table-hover mt-5 text-center" style="width: 100%;">
         <tbody>
@@ -15,5 +15,9 @@
             </tr>
         </tbody>
     </table>
+</div>
+
+<div style="display:flex; align-items: center; justify-content: center;">
+    <button style="align-self: center; justify-content: center;"> Add </button>
 </div>
 {% endblock content%}

@@ -193,6 +193,15 @@ def create_activity(request):
 def update_activity(request):
     return render(request, 'update_activity.html', {})
 
+def program(request):
+    return render(request, 'program.html', {})
+
+def pickup_schedule(request):
+    return render(request, 'pickup_schedule.html', {})
+
+def manage_extracurricular(request):
+    return render(request, 'manage_extracurricular.html', {})
+
 def display_dad_name(request, dadName):
     # You can use dadName in the template or perform any other logic
     context = {'dadName': dadName}

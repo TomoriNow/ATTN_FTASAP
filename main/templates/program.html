@@ -1,78 +1,73 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>Program Data</h1>
+<h1 style="text-align: center">Program Data</h1>
 <!-- R Payment History (Child’s Perspective) Use Django IF statements -->
 
-<h1> 
 
-<div class="d-flex align-items-center justify-content-center">
-    <table class="table table-bordered table-striped table-hover mt-5 text-center" style="width: 100%;">
-        <tbody>
-            <tr>
-                <th>Program Name:</th>
-                <td>
-                    <input type="text" name="programName">
-                </td>
-                <td></td>
-            </tr>
-            <tr>
-                <th>Program Year:</th>
-                <td>
-                    <input type="text" name="programYear">
-                </td>
-                <td></td>
-            </tr>
-            <tr>
-                <th>Class Name:</th>
-                <td>
-                    <input type="text" name="className">
-                </td>
-                <td></td>
-            </tr>
-            <tr>
-                <th>Caregiver:</th>
-                <td>
-                    <input type="text" name="className">
-                </td>
-                <td></td>
-            </tr>
-            <tr>
-                <th>Room Number:</th>
-                <td>
-                    <input type="text" name="className">
-                </td>
-                <td></td>
-            </tr>
-            <tr>
-                <th>Enrolled On:</th>
-                <td>
-                    <input type="text" name="className">
-                </td>
-                <td></td>
-            </tr>
-            <tr>
-                <th>Extracurricular Taken:</th>
-                <td>
-                    <input type="text" name="className">
-                </td>
-                <td> <button> Manage Extracurricular </button> </td>
-            </tr>
-            <tr>
-                <th>Shuttle Service:</th>
-                <td>
-                    <input type="text" name="className">
-                </td>
-                <td></td>
-            </tr>
-        </tbody>
-    </table>
+<div>
+    <p>Program Name: Kindergarten</p>
+    <p>Program Year: 2023</p>
+    <p>Class Name: Orchard</p>
+    <p>Caregiver: Jane DOe</p>
+    <p>Room Number: 202</p>
+    <p>Enrolled on:: 2022</p>
+    <p>Extracurricular Name: Badminton, Soccer <button href="#">Manage Extracurricular</button></p>
+    <p>Shuttle Service: 2PM, John Doe</p>
 </div>
 
 <h2> Activity Schedule </h2>
-<table> </table>
+<table>
+    <colgroup>
+        <col style="width: 200px">
+        <col style="width: 100px">
+    </colgroup>
+    <thead>
+        <tr>
+            <th>Activity Name</th>
+            <th>Day</th>
+            <th> Time </th>
+        </tr>
+        <tbody>
+            <tr>
+                <td>Badminton</td>
+                <td>Monday</td>
+                <td>10 AM - 11 AM</td> 
+            </tr>
+            <tr>
+                <td>Basketball</td>
+                <td>Thursday</td>
+                <td>10 AM - 11 AM</td> 
+            </tr>
+        </tbody>
+    </thead> 
+</table>
 
 <br>
 
 <h2> Menu Schedule </h2>
-<table> </table>
+<table>
+    <colgroup>
+        <col style="width: 200px">
+        <col style="width: 100px">
+    </colgroup>
+    <thead>
+        <tr>
+            <th>Menu Name</th>
+            <th>Day</th>
+            <th>Hour</th>
+        </tr>
+        <tbody>
+            <tr>
+                <td>Rendang</td>
+                <td>Monday</td>
+                <td>12 AM</td> 
+            </tr>
+            <tr>
+                <td>Ice Cream</td>
+                <td>Thursday</td>
+                <td>12 AM</td> 
+            </tr>
+        </tbody>
+    </thead> 
+</table>
 {% endblock content %}

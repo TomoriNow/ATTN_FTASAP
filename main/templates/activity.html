@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>Activity</h1>
+<h1 class="text-center">Activity</h1>
 <!-- CRD Extracurricular Taking-->
 <a href="{% url 'main:create_activity' %}"><button>[Add New Activity]</button></a>
 <div class="d-flex align-items-center justify-content-center">
@@ -9,9 +9,21 @@
             <th>Activity Name</th>
             <th>Operation</th>
             <tr>
-                
+                    <td>Basketball</td>
+                    <td>
+                        <a href="{% url 'main:update_activity'%}"><button type="button" class="btn btn-warning">Edit</button></a>
+                        <a href="#"><button type="button" class="btn btn-danger">Delete</button></a>
+                    </td>
             </tr>
+            <tr>
+                <td>Soccer</td>
+                <td>
+                    <a href="{% url 'main:update_activity'%}"><button type="button" class="btn btn-warning">Edit</button></a>
+                    <a href="#"><button type="button" class="btn btn-danger">Delete</button></a>
+                </td>
+        </tr>
         </tbody>
     </table>
 </div>
+<div style="margin-top: 5px; text-align: center;"> <button style="align-self: center">Back</button> </div>
 {% endblock content%}
