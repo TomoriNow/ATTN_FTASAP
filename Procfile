@@ -1,0 +1,1 @@
+web: gunicorn 'merah_biru_daycare.wsgi'
