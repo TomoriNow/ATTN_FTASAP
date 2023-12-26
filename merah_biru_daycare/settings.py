@@ -133,4 +133,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #CSRF Stuff
 
-CSRF_TRUSTED_ORIGINS = ['https://web-production-a624.up.railway.app']
+CSRF_TRUSTED_ORIGINS = ['https://attn-ftasap.up.railway.app']
