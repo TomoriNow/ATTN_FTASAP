@@ -1,0 +1,45 @@
+<!-- manage_menus.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Manage Menus</h1>
+    <!-- Add Menu to Existing -->
+    <form action="#" method="post">
+        <label for="menuSelect">Select Menu:</label>
+        <select id="menuSelect" name="menuSelect">
+            <!-- Example options, to be populated from backend -->
+            <option value="1">Breakfast</option>
+            <option value="2">Lunch</option>
+            <!-- Additional options for pre-existing menus -->
+        </select>
+        <button type="submit">Add</button>
+    </form>
+
+    <!-- Menu Table -->
+    <div class="d-flex align-items-center justify-content-center">
+        <table class="table table-bordered table-striped table-hover mt-5 text-center" style="width: 100%;">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Operation</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for child in result %}
+                <tr>
+                    <td>{{ child.0 }}</td>
+                    <td>{{ child.1 }}</td>
+                    <td><a href="{% url 'main:menu_form' %}" class="btn btn-primary">Edit</a>
+                    <a href="{% url 'main:children_class' %}" class="btn btn-primary">Delete</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- Back Button (Centered) -->
+    <div class="text-center">
+        <a href="{% url 'main:dashboard' %}" class="btn btn-secondary">Back</a>
+    </div>
+{% endblock content %}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="text-center">DAILY REPORT</h1>
+<table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th>No</th>
+        <th>Class</th>
+        <th>Date</th>
+        <th>Activity Report</th>
+        <th>Eating Report</th>
+        <th>Photo Link</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for report in result%}
+        <tr>
+          <td>{{ report.0 }}</td>
+          <td>{{ report.1 }}</td>
+          <td>{{ report.2 }}</td>
+          <td>{{ report.3}}</td>
+          <td>{{ report.4 }}</td>
+          <td><a href='{{ report.5 }}'>Link to Photo {{report.0}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+<div style="margin-top: 20px; text-align: center;">
+    <a href="{% url 'main:dashboard' %}" ><button>Back</button></a>
+</div>
+  {% endblock content %}

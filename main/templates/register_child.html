@@ -1,0 +1,111 @@
+{% block content %}
+  <h2>Child Registration Form</h2>
+  <form method="POST">
+    {% csrf_token %}
+    <p>
+    <label for="id_username">Phone Number:</label>
+    <input type="text" name="username" maxlength="30" autofocus="" required="" id="id_username">
+  </p>
+
+  
+  <p>
+    <label for="id_password1">Password:</label>
+    <input type="password" name="password1" autocomplete="new-password" required="" id="id_password1">
+    
+      <span class="helptext"></span></p><ul><li>Your password can’t be too similar to your other personal information.</li><li>Your password must contain at least 8 characters.</li><li>Your password can’t be a commonly used password.</li><li>Your password can’t be entirely numeric.</li></ul>
+    
+    
+  <p></p>
+
+  
+  <p>
+    <label for="id_password2">Password confirmation:</label>
+    <input type="password" name="password2" autocomplete="new-password" required="" id="id_password2">
+    
+      <span class="helptext">Enter the same password as before, for verification.</span>
+    
+    
+      
+    
+  </p>
+    <p>
+    <label for="id_firstName">FirstName:</label>
+    <input type="text" name="firstName" maxlength="20" required="" id="id_firstName">
+    
+    
+  </p>
+
+  
+  <p>
+    <label for="id_lastName">LastName:</label>
+    <input type="text" name="lastName" maxlength="20" required="" id="id_lastName">
+    
+    
+  </p>
+
+  
+  <p>
+    <label for="id_gender">Gender:</label>
+    <select name="gender" required="" id="id_gender">
+  <option value="" selected="">---------</option>
+
+  <option value="Male">Male</option>
+
+  <option value="Female">Female</option>
+
+</select>
+    
+    
+  </p>
+
+  
+  <p>
+    <label for="id_birthDate">BirthDate:</label>
+    <input type="date" name="birthDate" required="" id="id_birthDate">
+    
+    
+  </p>
+
+  
+  <p>
+    <label for="id_address">Address:</label>
+    <textarea name="address" cols="40" rows="10" required="" id="id_address"></textarea>
+    
+    
+      
+    
+  </p>
+  <p>
+    <label for="id_dadName">Father's Name:</label>
+    <input type="text" name="dadName" maxlength="50" required="" id="id_dadName">
+    
+    
+  </p>
+  <p>
+    <label for="id_momName">Mother's Name:</label>
+    <input type="text" name="momName" maxlength="50" required="" id="id_momName">
+    
+    
+  </p>
+  <p>
+    <label for="id_dadJob">Father's Job:</label>
+    <input type="text" name="dadJob" maxlength="20" required="" id="id_dadJob">
+    
+    
+  </p>
+  <p>
+    <label for="id_momJob">Mother's Job:</label>
+    <input type="text" name="momJob" maxlength="20" required="" id="id_momJob">
+    
+  {% if messages %}
+    <ul>
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+  {% endif %} 
+  </p>
+    <button type="submit">Register</button> 
+  </form>
+  <a href="{% url 'main:register' %}" ><button>Back</button></a>
+{% endblock content %}

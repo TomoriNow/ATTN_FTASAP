@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- Note that the model and form for Extracurricular have not been made yet for Group Assignment 2!-->
+<h1 class="text-center">Create Activity</h1>
+<form method="POST">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="extracurricularName" class="form-label">Activity Name: </label>
+        <input type="text" class="form-control" maxlength="30" name="CreateActivity">
+    </div>
+    <div style="margin-top: 20px; text-align: center;">
+        <a type="submit"><button>Add</button></a>
+    </div>
+</form>
+<div style="margin-top: 20px; text-align: center;">
+    <a href="{% url 'main:activity' %}" ><button>Back</button></a>
+</div>
+
+{% endblock content %}

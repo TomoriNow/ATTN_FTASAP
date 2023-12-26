@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- Note that the model and form for Extracurricular have not been made yet for Group Assignment 2!-->
+{%if user.is_staff and user.is_superuser%}
+    <h1 class="text-center">EXTRACURRICULAR</h1>
+    <div>
+        <a href="{% url 'main:add_extracurricular' %}" ><button>Add New Extracurricular</button></a>
+    </div>
+    <div class="d-flex align-items-center justify-content-center">
+        <table class="table table-bordered table-striped table-hover mt-5 text-center" style="width: 80%;">
+            <thead>
+                <th>Name</th>
+                <th>Day</th>
+                <th>Hour</th>
+                <th>Operation</th>
+            </thead>
+            <tbody>
+                {% for extracurricular in result %}
+                <tr>
+                  <td>{{ extracurricular.1 }}</td>
+                  <td>{{ extracurricular.2 }}</td>
+                  <td>{{ extracurricular.3 }}</td>
+                    <td>
+                        <a href="{% url 'main:extracurricular_detail' id=extracurricular.0|stringformat:"s" name=extracurricular.1 day=extracurricular.2 hour=extracurricular.3 %}" ><button>Details</button></a>
+                        {%if  extracurricular.4%}
+                        <a href="{% url 'main:update_extracurricular' id=extracurricular.0|stringformat:"s" name=extracurricular.1 day=extracurricular.2 hour=extracurricular.3 %}" ><button>Edit</button></a>
+                        <a href="{% url 'main:delete_extracurricular' id=extracurricular.0|stringformat:"s" %}" ><button>Delete</button></a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+            
+        </table>
+    </div>
+    
+    <div style="margin-top: 20px; text-align: center;">
+        <a href="{% url 'main:dashboard' %}" ><button>Back</button></a>
+    </div>
+{% endif %}
+
+{% endblock content %}

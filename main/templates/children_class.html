@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="text-center">CHILDREN IN CLASS</h1>
+
+    <!-- Display Class Information -->
+    <div class="mt-3 ms-2">
+        {% for class_info in result1 %}
+            <p>Class Name: {{ class_info.0 }}</p>
+            <p>Year: {{ class_info.1 }}</p>
+            <p>Total Children in Class: {{ class_info.2 }}</p>
+        {% endfor %}
+    </div>
+
+    <!-- Room Table (Centered) -->
+    <div class="d-flex align-items-center justify-content-center mt-3">
+        <table class="table table-bordered table-striped table-hover text-center" style="width: 100%;">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Birthday</th>
+                    <th>Enrollment Type</th>
+                    <th>Daily Report</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for child in result %}
+                <tr>
+                    <td>{{ child.0 }} {{ child.1 }}</td>
+                    <td>{{ child.2| add:0 }}</td>
+                    <td>{{ child.3 }}</td>
+                    <td>{{ child.4 }}</td>
+                    <td><a href="{% url 'main:child_dailyreport' %}" class="btn btn-primary">View Daily Report</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Back Button (Centered) -->
+    <div class="text-center mt-3">
+        <a href="{% url 'main:class_list' %}" class="btn btn-secondary">Back</a>
+    </div>
+{% endblock content %}

@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 style="text-align: center">Program Data</h1>
+<!-- R Payment History (Child’s Perspective) Use Django IF statements -->
+
+
+
+<div>
+    <p>Program Name: {{ result.0 }}</p>
+    <p>Program Year: {{ result.1 }}</p>
+    <p>Class Name: {{ result.2 }}</p>
+    <p>Caregiver: {{ result.3 }} {{ result.4 }}</p>
+    <p>Room Number: {{ result.5 }}</p>
+    <p>Enrolled on:: {{ result.6 }}</p>
+    <p>
+        Extracurriculars Taken: 
+        {% for day_tuple in result1 %}
+            {% for day in day_tuple %}
+                {{ day }},
+                {% if not forloop.last %}, {% endif %}
+            {% endfor %}
+        {% endfor %}
+        <a class="nav-link" href="{% url 'main:manage_extracurricular' pid=result.9|stringformat:'s' year=result.1 cl=result.2%}"><button>Manage Extracurricular </button></a></p>
+    <p>Shuttle Service: {{ result.7 }}, {{ result.8 }}</p>
+</div>
+
+<h2> Activity Schedule </h2>
+<table>
+    <colgroup>
+        <col style="width: 200px">
+        <col style="width: 100px">
+    </colgroup>
+    <thead>
+        <tr>
+            <th>Activity Name</th>
+            <th>Day</th>
+            <th> Time </th>
+        </tr>
+        <tbody>
+            {% for child in result2%}
+      <tr>
+        <td>{{ child.0 }}</td>
+        <td>{{ child.3}}</td>
+        <td>{{ child.1 }} - {{child.2}}</td>
+      </tr>
+      {% endfor %}
+        </tbody>
+    </thead> 
+</table>
+
+<br>
+
+<h2> Menu Schedule </h2>
+<table>
+    <colgroup>
+        <col style="width: 200px">
+        <col style="width: 100px">
+    </colgroup>
+    <thead>
+        <tr>
+            <th>Menu Name</th>
+            <th>Day</th>
+            <th>Hour</th>
+        </tr>
+        <tbody>
+            {% for child in result3%}
+      <tr>
+        <td>{{ child.0 }}</td>
+        <td>{{ child.2}}</td>
+        <td>{{ child.1 }}</td>
+      </tr>
+      {% endfor %}
+        </tbody>
+    </thead> 
+</table>
+
+<a class="nav-link" href="{% url 'main:dashboard'%}"><button> Back </button></a>
+{% endblock content %}

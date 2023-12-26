@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="text-center">CHILD LIST</h1>
+<table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th>Child Name</th>
+        <th>Age</th>
+        <th>Birthday</th>
+        <th>Latest Class Name</th>
+        <th>Phone Number</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for child in result%}
+      <tr>
+        <td>{{ child.0 }} {{ child.1 }}</td>
+        <td>{{ child.2|add:0 }}</td>
+        <td>{{ child.3 }} {{child.4}}</td>
+        <td>{{ child.5|default:"" }}</td>
+        <td>{{ child.6 }}</td>
+      </tr>
+      {% endfor %}
+
+    </tbody>
+  </table>
+<div style="margin-top: 20px; text-align: center;">
+    <a href="{% url 'main:dashboard' %}" ><button>Back</button></a>
+</div>
+  {% endblock content %}

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="text-center">Manage Extracurricular</h1>
+<!-- CRD Extracurricular Taking-->
+<h3> My Extracurricular: </h3>
+<div class="d-flex align-items-center justify-content-center">
+    <table class="table table-bordered table-striped table-hover mt-5 text-center" style="width: 100%;">
+        <tbody>
+            <th>Name</th>
+            <th>Day</th>
+            <th>Hour</th>
+            <th>Operation</th>
+            {% for ex in result %}
+                <tr>
+                    <td>{{ ex.0 }}</td>
+                    <td>{{ ex.1 }}</td>
+                    <td>{{ ex.2 }}</td>
+                    <td>
+                        <a href="{% url 'main:delete_extracurricular_user' Eid=ex.3|stringformat:"s"  Uid=ex.4|stringformat:"s" pid=pid year=year cl=cl%}" ><button class="btn btn-primary">Delete</button></a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<form method="post">
+    {% csrf_token %}
+    
+    <label for="dropdown">Select an option:</label>
+    <select name="dropdown" id="dropdown">
+        {% for option in result1 %}
+            <option value="{{ option.0 }}, {{ option.1 }}">{{ option.1 }}, {{ option.2 }}, {{ option.3 }}</option>
+        {% endfor %}
+    </select>
+    
+    <button type="submit">ADD</button>
+</form>
+
+</div>
+
+<a class="nav-link" href="{% url 'main:program'%}"><button> Back </button></a></p>
+{% endblock content%}

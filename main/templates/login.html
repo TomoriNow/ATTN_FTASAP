@@ -1,0 +1,21 @@
+{% block content %}
+  <h2>Login</h2>
+  <form method="POST">
+    {% csrf_token %}
+    <label for="phoneNo">Phone Number:</label>
+    <input type="text" name="phoneNo" required>
+    <br>
+    <label for="password">Password:</label>
+    <input type="password" name="password" required>
+    <br>
+    <button type="submit">Login</button>
+  </form>
+  <a href="{% url 'main:show_main' %}" ><button>Back</button></a>
+  {% if messages %}
+      <ul>
+          {% for message in messages %}
+              <li>{{ message }}</li>
+          {% endfor %}
+      </ul>
+  {% endif %}  
+{% endblock content %}

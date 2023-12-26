@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="text-center">CHILD DASHBOARD</h1>
+{% include 'child_navbar.html'%}
+
+<ul>
+    <li><h5>Name: {{request.session.name}}</h5></li>
+    <li><h5>Registered Phone Number: {{request.session.phoneNo}}</h5></li>
+    <li><h5>Address: {{request.session.address}}</h5></li>
+    <li><h5>Gender: {{request.session.gender}}</h5></li>
+    <li><h5>Date of Birth: {{request.session.birthDate}}</h5></li>
+    <li><h5>Dad Name: {{ request.session.dadName }}</h5></li>
+    <li><h5>Mom Name: {{request.session.momName}}</h5></li>
+</ul>
+
+{% endblock content %}

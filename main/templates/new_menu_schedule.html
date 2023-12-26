@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% block content %}
+<body><h1 class="text-center">Add Menu Schedule</h1>
+</p>
+<p>
+  <form method="POST">
+    {% csrf_token %}
+    <p>
+      <label for="id_day">Day:</label>
+      <select name="day" id="id_day" required="">
+          <option value="Monday">Monday</option>
+          <option value="Tuesday">Tuesday</option>
+          <option value="Wednesday">Wednesday</option>
+          <option value="Thursday">Thursday</option>
+          <option value="Friday">Friday</option>
+          <option value="Saturday">Saturday</option>
+          <option value="Sunday">Sunday</option>
+      </select>
+  </p>
+<br>
+
+<p style="font-weight: bold;">Morning Snack:</p>
+    <p>
+        <label for="id_morningSnack">Menu Name:</label>
+        <select name="morningSnack" required="" id="id_morningSnack">
+          {% for menu in menus %}
+          {% if menu.2 == "Morning Snack"%}
+          <option value={{menu.0}}>{{menu.1}}</option>
+          {% endif %}
+          {%endfor%}
+    
+    </select>
+
+      <p>
+        <label for="id_morningSnackHour">Hour:</label>
+        <input type="text" name="morningSnackHour" maxlength="50" required="" id="id_morningSnackHour">
+        
+        
+      </p>
+
+      <p style="font-weight: bold;">Lunch:</p>
+    <p>
+        <label for="id_lunch">Menu Name:</label>
+        <select name="lunch" required="" id="id_lunch">
+          {% for menu in menus %}
+          {% if menu.2 == "Lunch"%}
+          <option value={{menu.0}}>{{menu.1}}</option>
+          {% endif %}
+          {%endfor%}
+    
+    </select>
+
+      <p>
+        <label for="id_lunchHour">Hour:</label>
+        <input type="text" name="lunchHour" maxlength="50" required="" id="id_lunchHour">
+        
+        
+      </p>
+
+      <p style="font-weight: bold;">Afternoon Snack:</p>
+    <p>
+        <label for="id_afternoonSnack">Menu Name:</label>
+        <select name="afternoonSnack" required="" id="id_afternoonSnack">
+          {% for menu in menus %}
+          {% if menu.2 == "Afternoon Snack"%}
+          <option value={{menu.0}}>{{menu.1}}</option>
+          {% endif %}
+          {%endfor%}
+    </select>
+
+      <p>
+        <label for="id_afternoonSnackHour">Hour:</label>
+        <input type="text" name="afternoonSnackHour" maxlength="50" required="" id="id_afternoonSnackHour">
+        
+        
+      </p>
+      {% if messages %}
+      <ul>
+          {% for message in messages %}
+              <li>{{ message }}</li>
+          {% endfor %}
+      </ul>
+  {% endif %} 
+      <div style="margin-top: 20px; text-align: center;">
+        <a type="submit" ><button>Save</button></a>
+      </div>
+  </form>
+  <div style="margin-top: 20px; text-align: center;">
+    <a href="{% url 'main:offered_program_detail' id name year %}" ><button>Back</button></a>
+  </div>
+</body>
+{% endblock content %}

@@ -55,7 +55,7 @@ ROOT_URLCONF = 'merah_biru_daycare.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -76,8 +76,13 @@ WSGI_APPLICATION = 'merah_biru_daycare.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        #'ENGINE': 'django.db.backends.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'railway',
+        'USER': 'postgres',
+        'PASSWORD': 'cB6ffd*Aa43ded1DG6gfBAE6D1cAAGb2',
+        'HOST': 'monorail.proxy.rlwy.net',
+        'PORT': '42865',
     }
 }
 

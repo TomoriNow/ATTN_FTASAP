@@ -1,0 +1,20 @@
+{% block content %}
+  <h2>Register</h2>
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    {{ form2.as_p }}
+    <div>
+    {{ form3.as_p }}
+    </div>
+    <button type="submit">Register</button> <a href="{% url 'main:register' %}" >
+  </form>
+  <a href="{% url 'main:register' %}" ><button>Back</button></a>
+  {% if messages %}
+  <ul>
+      {% for message in messages %}
+          <li>{{ message }}</li>
+      {% endfor %}
+  </ul>
+{% endif %} 
+{% endblock content %}

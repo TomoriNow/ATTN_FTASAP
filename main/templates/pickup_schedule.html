@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- Note that the model and form for Extracurricular have not been made yet for Group Assignment 2!-->
+<h1 class="text-center">PICKUP SCHEDULE</h1>
+<div>
+    <p>
+        Days: 
+        {% for day_tuple in result1 %}
+            {% for day in day_tuple %}
+                {{ day }}
+                {% if not forloop.last %}, {% endif %}
+            {% endfor %}
+        {% endfor %}
+    </p>
+</div>
+<div>
+    <h2>Child Pickup Schedule</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Child Name</th>
+                <th>Pickup Hour</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for child in result%}
+      <tr>
+        <td>{{ child.0 }} {{ child.1 }}</td>
+        <td>{{ child.2 }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    <div class="container">
+        <a href="{% url 'main:driver_dashboard'%}" class="btn"><button>Back</button></a>
+    </div>
+</div>
+{% endblock content%}

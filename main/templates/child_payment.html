@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- Note that the model and form for Child Payment and Payment History have not been made yet for Group Assignment 2!-->
+<h1 class="text-center">PAYMENT FORM</h1>
+<form method="POST" id="paymentForm">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="id_paymentDate" class="form-label">Payment Date: </label>
+        <input type="date" class="form-control" id="id_paymentDate" required="" name="paymentDate">
+    </div>
+    <div class="mb-3">
+        <label for="id_paymentType" class="form-label">Type: </label>
+        <select class="form-select" id="id_paymentType" name="paymentType" required> 
+            <option selected>Pick type of payment</option>
+            <option value="daily">daily</option>
+            <option value="monthly">monthly</option>
+            <option value="fine">fine</option>
+            <option value="excursion">excursion</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="id_paymentAmount" class="form-label">Amount: </label>
+        <input type="number" class="form-control"id="id_paymentAmount" name="paymentAmount" required>
+    </div>
+    <div class="d-flex justify-content-center">
+        <button type="button" class="btn btn-primary" onclick="checkPayment()">PAY</button>
+    </div>
+</form>
+<div style="margin-top: 20px; text-align: center;">
+    <a href="{% url 'main:dashboard' %}" ><button>Back</button></a>
+</div>
+
+<script>
+
+    function checkPayment() {
+        var paymentType = document.getElementById('id_paymentType').value;
+        var amount = document.getElementById('id_paymentAmount').value;
+        var fine = {{ expectedFine }};
+        var monthly = {{ expectedMonthly }};
+        var daily = {{ expectedDaily }};
+        
+        if (paymentType=="fine") {
+            if (amount != fine && fine != null  ) {
+                alert("Please pay the fine first: " + fine.toString());
+            } else {
+                alert("Payment Successful!");
+                document.getElementById('paymentForm').submit();
+            }
+            
+        } else if (paymentType=="daily") {
+            
+            if (amount != daily) {
+                alert("Expected Payment: " + daily.toString());
+            } else {
+                alert("Payment Successful!");
+                document.getElementById('paymentForm').submit();
+            }
+            
+        } else if (paymentType=="monthly") {
+            
+            if (amount != monthly) {
+                alert("Expected Payment: " + monthly.toString());
+            } else {
+                alert("Payment Successful!");
+                document.getElementById('paymentForm').submit();
+            }
+        } else {
+            alert("Payment Successful!");
+            document.getElementById('paymentForm').submit();
+        }
+    } 
+    
+        
+    </script>
+
+
+
+
+{% endblock content %}

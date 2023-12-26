@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- Note that the model and form for Extracurricular have not been made yet for Group Assignment 2!-->
+<h1 class="text-center">Update Activity</h1>
+<form method="POST">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="{{ form.extracurricularName }}" class="form-label">Extracurricular Name: </label>
+        <input type="text" class="form-control" maxlength="30" value="{{ form.extracurricularName.vaule }}">
+    </div>
+    <div class="mb-3">
+        <label for="{{ form.extracurricularDay }}" class="form-label">Day: </label>
+        <select class="form-select">
+            <option selected>{{ form.extracurricularDay }}</option>
+            <option value="1">Monday</option>
+            <option value="2">Tuesday</option>
+            <option value="3">Wednesday</option>
+            <option value="4">Thursday</option>
+            <option value="5">Friday</option>
+            <option value="6">Saturday</option>
+            <option value="7">Sunday</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="{{ form.extracurricularHour }}" class="form-label">Hour: </label>
+        <input type="number" class="form-control" value="{{ form.extracurricularHour.vaule }}">
+    </div>
+    <div class="d-flex justify-content-center">
+        <a href="{% url 'main:crud_extracurricular' %}"><button type="submit" class="btn btn-primary" value="Update Extracurricular">UPDATE</button></a>
+    </div>
+</form>
+<div style="margin-top: 20px; text-align: center;">
+    <a href="{% url 'main:crud_extracurricular' %}" ><button>Back</button></a>
+</div>
+
+{% endblock content %}

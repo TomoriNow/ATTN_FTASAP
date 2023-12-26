@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="text-center">ROOM</h1>
+    <!-- Add Room Button (Aligned Left) -->
+    <div class="text-left">
+        <a href="{% url 'main:room_form' %}"><button type="submit" class="btn btn-primary mb-3 ms-1">Add New Room</button></a>
+    </div>
+
+    <!-- Room Table (Centered) -->
+    <div class="d-flex align-items-center justify-content-center">
+        <table class="table table-bordered table-striped table-hover mt-1 text-center" style="width: 100%;">
+            <thead>
+                <tr>
+                    <th>Room Number</th>
+                    <th>Room Area</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for room in result %}
+                <tr>
+                    <td> {{ room.0 }}</td>
+                    <td> {{ room.1 }}</td>
+                    <td><a href="{% url 'main:room_form' %}" class="btn btn-primary">Edit</a>
+                        <a href="{% url 'main:children_class' %}" class="btn btn-primary">Delete</a></td>                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Back Button (Centered) -->
+    <div class="text-center">
+        <a href="{% url 'main:dashboard' %}" class="btn btn-secondary">Back</a>
+    </div>
+{% endblock content %}

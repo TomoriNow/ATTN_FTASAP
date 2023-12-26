@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+<body><h1 class="text-center">NEW PROGRAM OFFER</h1>
+  <form method="POST">
+    {% csrf_token %}
+    <p>
+        <label for="id_program">Select Program:</label>
+        <select name="program" required="" id="id_program">
+          {% for program in programs %}
+          <option value={{program.0}}>{{program.1}}</option>
+          {%endfor%}
+    
+    </select>
+        
+      </p>
+      <p>
+        <label for="id_monthlyFee">Monthly Fee:</label>
+        <input type="number" name="monthlyFee" min = "1" required="" id="id_monthlyFee">
+        
+        
+      </p>
+      <p>
+        <label for="id_dailyFee">Daily Fee:</label>
+        <input type="number" name="dailyFee" min = "1" required="" id="id_dailyFee">
+        
+        
+      </p>
+
+      <div style="margin-top: 20px; text-align: center;">
+        <a type="submit"><button>Save</button></a>
+      </div>
+    </form>
+    <div style="margin-top: 20px; text-align: center;">
+      <a href="{% url 'main:offered_program' %}" ><button>Back</button></a>
+    </div>
+
+
+</body>
+{% endblock content %}

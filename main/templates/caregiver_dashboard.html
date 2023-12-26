@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="text-center">CAREGIVER DASHBOARD</h1>
+{% include 'caregiver_navbar.html'%}
+<ul>
+    <li><h5>Name: {{request.session.name}}</h5></li>
+    <li><h5>Registered Phone Number: {{request.session.phoneNo}}</h5></li>
+    <li><h5>Address: {{request.session.address}}</h5></li>
+    <li><h5>Gender: {{request.session.gender}}</h5></li>
+    <li><h5>Date of Birth: {{request.session.birthDate}}</h5></li>
+    <li><h5>NIK: {{request.session.NIK}}</h5></li>
+    <li><h5>NPWP: {{request.session.NPWP}}</h5></li>
+    <li><h5>Bank Name: {{request.session.bankName}}</h5></li>
+    <li><h5>Bank Account Number: {{request.session.bankAccount}}</h5></li>
+    <li><h5>Certificates: </h5>
+        <table  class="table table-bordered table-striped table-hover mt-5 text-center" style="width: 80%;">
+            <thead>
+                <th>Certificate Name</th>
+                <th>Certificate Number</th>
+                <th>Certificate Year</th>
+                <th>Certificate Organizer</th>
+            </thead>
+            <tbody>
+                {% for certificate in request.session.certificates %}
+                <tr>
+                    {% for item in certificate %}
+                        <td>{{ item }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </li>
+</ul>
+
+{% endblock content %}
