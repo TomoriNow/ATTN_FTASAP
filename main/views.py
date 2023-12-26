@@ -833,6 +833,10 @@ def update_extracurricular(request, id, name, day, hour):
     return render(request, 'update_extracurricular.html', {'id': id, 'name':name, 'day':day, 'hour':hour})
     
 def child_payment(request):
+    expectedMonthly = 0
+    expectedDaily = 0
+    expectedFine = 0
+    
     if request.method == "POST":
         connection=None
         try:
@@ -874,7 +878,7 @@ def child_payment(request):
             crsr.execute(sqlStrExpectedFine, (userid,))
             expectedFine = crsr.fetchone()
             
-            if expectedFine is not None:
+            if expectedFine is not None and expectedFine[0] is not None:
                 expectedFine = int(expectedFine[0])
             else:
                 expectedFine = 0
@@ -887,7 +891,7 @@ def child_payment(request):
             crsr.execute(sqlStrExpectedMonthly, (programid, year,))
             expectedMonthly = crsr.fetchone()
             
-            if expectedMonthly is not None:
+            if expectedMonthly is not None and expectedMonthly[0] is not None:
                 expectedMonthly = int(expectedMonthly[0])
             else:
                 expectedMonthly = 0
@@ -900,7 +904,7 @@ def child_payment(request):
             crsr.execute(sqlStrExpectedDaily, (programid, year,))
             expectedDaily = crsr.fetchone()
             
-            if expectedDaily is not None:
+            if expectedDaily is not None and expectedDaily[0] is not None:
                 expectedDaily = int(expectedDaily[0])
             else:
                 expectedDaily = 0
@@ -920,7 +924,6 @@ def child_payment(request):
             if connection is not None:
                 connection.close()
                 print('Database connection terminated.')
-                
     try:
         params = config()
         print('Connecting to the postgreSQL database ...')
@@ -960,10 +963,12 @@ def child_payment(request):
         crsr.execute(sqlStrExpectedFine, (userid,))
         expectedFine = crsr.fetchone()
         
-        if expectedFine is not None:
+        if expectedFine is not None and expectedFine[0] is not None:
             expectedFine = int(expectedFine[0])
         else:
             expectedFine = 0
+            
+        print(expectedFine)
         
         sqlStrExpectedMonthly="""
         SELECT O.monthlyfee
@@ -973,10 +978,12 @@ def child_payment(request):
         crsr.execute(sqlStrExpectedMonthly, (programid, year,))
         expectedMonthly = crsr.fetchone()
         
-        if expectedMonthly is not None:
+        if expectedMonthly is not None and expectedMonthly[0] is not None:
             expectedMonthly = int(expectedMonthly[0])
         else:
             expectedMonthly = 0
+        
+        print(expectedMonthly)
         
         sqlStrExpectedDaily="""
         SELECT O.dailyfee
@@ -986,10 +993,12 @@ def child_payment(request):
         crsr.execute(sqlStrExpectedDaily, (programid, year,))
         expectedDaily = crsr.fetchone()
         
-        if expectedDaily is not None:
+        if expectedDaily is not None and expectedDaily[0] is not None:
             expectedDaily = int(expectedDaily[0])
         else:
             expectedDaily = 0
+        
+        print(expectedDaily)
         
         crsr.close()
     except (Exception, psycopg2.DatabaseError) as error:
