@@ -22,8 +22,8 @@
                 <tr>
                     <td> {{ room.0 }}</td>
                     <td> {{ room.1 }}</td>
-                    <td><a href="{% url 'main:room_form' %}" class="btn btn-primary">Edit</a>
-                        <a href="{% url 'main:children_class' %}" class="btn btn-primary">Delete</a></td>                </tr>
+                    <td><a href="{% url 'main:edit_room' roomNo=room.0|stringformat:"s" area=room.1 %}" class="btn btn-primary">Edit</a>
+                        <a href="{% url 'main:delete_room' roomNo=room.0|stringformat:"s" %}" class="btn btn-danger">Delete</a></td>                </tr>
                 {% endfor %}
             </tbody>
         </table>

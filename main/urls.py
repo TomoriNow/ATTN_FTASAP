@@ -2,7 +2,7 @@ from django.urls import path
 from main.views import show_main, login_user, register_admin, register, register_staff, dashboard, register_child, register_driver, daily_report_child, child_list, register_caregiver
 from main.views import new_activity_schedule, new_menu_schedule, new_offered_program, offered_program, offered_program_detail, extracurricular_detail, add_extracurricular, update_extracurricular
 from main.views import child_payment, crud_extracurricular, payment_history, activity, create_activity, caregiver_dashboard, driver_dashboard, create_room, manage_menu, menu_form, room_form, class_list
-from main.views import children_class, child_dailyreport, daily_reportform, logout_user, delete_offered_program, delete_activity
+from main.views import children_class, child_dailyreport, daily_reportform, logout_user, delete_offered_program, delete_activity, delete_menu, edit_menu, delete_room, edit_room
 from main.views import *
 app_name = 'main'  # Set the app namespace if necessary
 
@@ -16,7 +16,7 @@ urlpatterns = [
     path('register/child/', register_child, name='register_child'),
     path('register/driver/', register_driver, name='register_driver'),
     path('register/caregiver/', register_caregiver, name='register_caregiver'),
-    path('dailyreport/', daily_report_child, name = "daily_report_child"),
+    path('daily_report_child/<str:first_name>/<str:last_name>/', daily_report_child, name='daily_report_child'),
     path('childlist/', child_list, name = "child_list"),
     path('dashboard/', dashboard, name = 'dashboard'),
     path('new-activity/<str:id>/<str:name>/<int:year>', new_activity_schedule, name = 'new_activity_schedule'),
@@ -42,11 +42,15 @@ urlpatterns = [
     path('manage_menu/', manage_menu, name = 'manage_menu'),
     path('manage_extracurricular/<str:pid>/<int:year>/<str:cl>', manage_extracurricular, name = 'manage_extracurricular'),
     path('menu_form/', menu_form, name = 'menu_form'),
+    path('edit_menu/<str:id>/<str:name>/<str:type>', edit_menu, name='edit_menu'),
+    path('delete_menu/<str:id>', delete_menu, name='delete_menu'),
     path('program/', program, name = 'program'),
     path('pickup_schedule/', pickup_schedule, name = 'pickup_schedule'),
     path('room_form/', room_form, name = 'room_form'),
+    path('edit_room/<str:roomNo>/<str:area>', edit_room, name='edit_room'),
+    path('delete_room/<str:roomNo>', delete_room, name = 'delete_room'),
     path('class_list/', class_list, name = 'class_list'),
-    path('children_class/', children_class, name = 'children_class'),
+    path('children_class/<str:class_name>/<int:year>/', children_class, name = 'children_class'),
     path('child_dailyreport/', child_dailyreport, name = 'child_dailyreport'),
     path('daily_reportform/', daily_reportform, name = 'daily_reportform'),
     path('delete_extracurricular/<str:id>', delete_extracurricular, name = 'delete_extracurricular'),

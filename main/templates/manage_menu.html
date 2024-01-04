@@ -4,20 +4,12 @@
 {% block content %}
     <h1>Manage Menus</h1>
     <!-- Add Menu to Existing -->
-    <form action="#" method="post">
-        <label for="menuSelect">Select Menu:</label>
-        <select id="menuSelect" name="menuSelect">
-            <!-- Example options, to be populated from backend -->
-            <option value="1">Breakfast</option>
-            <option value="2">Lunch</option>
-            <!-- Additional options for pre-existing menus -->
-        </select>
-        <button type="submit">Add</button>
-    </form>
+
 
     <!-- Menu Table -->
+    <a href="{% url 'main:menu_form' %}" class="btn btn-primary mt-5 mb-1 ms-1">Add New Menu</a>
     <div class="d-flex align-items-center justify-content-center">
-        <table class="table table-bordered table-striped table-hover mt-5 text-center" style="width: 100%;">
+        <table class="table table-bordered table-striped table-hover text-center" style="width: 100%;">
             <thead>
                 <tr>
                     <th>Name</th>
@@ -28,10 +20,10 @@
             <tbody>
                 {% for child in result %}
                 <tr>
-                    <td>{{ child.0 }}</td>
                     <td>{{ child.1 }}</td>
-                    <td><a href="{% url 'main:menu_form' %}" class="btn btn-primary">Edit</a>
-                    <a href="{% url 'main:children_class' %}" class="btn btn-primary">Delete</a></td>
+                    <td>{{ child.2 }}</td>
+                    <td><a href="{% url 'main:edit_menu' id=child.0|stringformat:"s" name=child.1 type=child.2 %}" class="btn btn-primary">Edit</a>
+                    <a href="{% url 'main:delete_menu' id=child.0|stringformat:"s" %}" class="btn btn-danger">Delete</a></td>
                 </tr>
                 {% endfor %}
             </tbody>

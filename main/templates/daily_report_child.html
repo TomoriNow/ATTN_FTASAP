@@ -1,11 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1 class="text-center">DAILY REPORT</h1>
+<h1 class="text-center">{{ child_name }} DAILY REPORT</h1>
+<div class="text-left">
+  <p>Child Name: {{ child_name }}</p>
+  <a href="{% url 'main:daily_reportform' %}">
+    <button type="submit" class="btn btn-primary mb-3 ms-1">Add New Report</button>
+  </a>
+</div>
+
 <table class="table table-striped table-hover">
     <thead>
       <tr>
-        <th>No</th>
-        <th>Class</th>
         <th>Date</th>
         <th>Activity Report</th>
         <th>Eating Report</th>
@@ -13,33 +18,19 @@
       </tr>
     </thead>
     <tbody>
+      {% for daily in result %}
       <tr>
-        <td>1</td>
-        <td>Toddler-A</td>
-        <td>2023-11-22</td>
-        <td>Engaged in group activities, learning ABCs and 123s</td>
-        <td>Ate a healthy lunch with fruits and vegetables</td>
-        <td><a href="https://unsplash.com/photos/a-woman-working-on-a-laptop-6uAssP0vuPs">Link to Photo 1</a></td>
+        <td>{{ daily.0 }}</td>
+        <td>{{ daily.1 }}</td>
+        <td>{{ daily.2 }}</td>
+        <td>{{ daily.3 }}</td>
       </tr>
-      <tr>
-        <td>2</td>
-        <td>Toddler-A</td>
-        <td>2023-11-23</td>
-        <td>Explored art and craft, created a colorful masterpiece</td>
-        <td>Enjoyed a snack time with crackers and juice</td>
-        <td><a href="https://unsplash.com/photos/people-sitting-at-the-table-2pPw5Glro5I">Link to Photo 2</a></td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>Toddler-A</td>
-        <td>2023-11-24</td>
-        <td>Outdoor play in the playground, practiced teamwork</td>
-        <td>Had a balanced dinner with proteins and carbohydrates</td>
-        <td><a href="https://unsplash.com/photos/black-and-white-plane-flying-over-the-sea-during-daytime-rNqs9hM0U8I">Link to Photo 3</a></td>
-      </tr>
+      {% endfor %}
     </tbody>
-  </table>
+</table>
 <div style="margin-top: 20px; text-align: center;">
-    <a href="{% url 'main:dashboard' %}" ><button>Back</button></a>
+    <a href="{% url 'main:class_list' %}">
+      <button>Back</button>
+    </a>
 </div>
-  {% endblock content %}
+{% endblock content %}

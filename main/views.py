@@ -345,8 +345,51 @@ def register_caregiver(request):
     context = {'form': form}# 'form2':form2, 'form3':form3}
     return render(request, 'register_caregiver.html', {})
 
-def daily_report_child(request):
-    return render(request, 'daily_report_child.html', {})
+def daily_report_child(request, first_name, last_name):
+    connection = None
+    result = []
+    child_name = None
+
+    try:
+        params = config()
+        print('Connecting to the PostgreSQL database...')
+        connection = psycopg2.connect(**params)
+
+        crsr = connection.cursor()
+
+        # Fetching child's information based on the first and last names received in the URL
+        child_query = """
+        SELECT FirstName, LastName
+        FROM U
+        WHERE FirstName = %s AND LastName = %s;
+        """
+        crsr.execute(child_query, (first_name, last_name))
+        child_data = crsr.fetchone()
+        if child_data:
+            child_name = f"{child_data[0]} {child_data[1]}"  # Update child_name if data is found
+
+            # Query to fetch daily reports for the selected child
+            report_query = """
+            SELECT Date, ActivityReport, EatingReport, Link
+            FROM DAILY_REPORT
+            WHERE UserID = (
+                SELECT UserID
+                FROM U
+                WHERE FirstName = %s AND LastName = %s
+            );
+            """
+            crsr.execute(report_query, (first_name, last_name))
+            result = crsr.fetchall()
+
+        crsr.close()
+    except (Exception, psycopg2.DatabaseError) as error:
+        print(error)
+    finally:
+        if connection is not None:
+            connection.close()
+            print('Database connection terminated.')
+    
+    return render(request, 'daily_report_child.html', {'result': result, 'child_name': child_name})
 
 def child_list(request):
     connection = None
@@ -1162,7 +1205,8 @@ def create_room(request):
         # sql command to be executed for fetching the data
         sqlStr = """
         SELECT r.roomno, r.area
-        from room r;
+        from room r
+        order by r.roomno;
         """
 
         # execute the data fetch SQL command along with the SQL placeholder values
@@ -1178,6 +1222,37 @@ def create_room(request):
             print('Database connection terminated.')        
     return render(request, 'create_room.html', {'result': result})
 
+def edit_room(request, roomNo, area):
+    if request.method=="POST":
+        connection = None
+        try:
+            params = config()
+            print('Connecting to the postgreSQL database ...')
+            connection = psycopg2.connect(**params)
+
+            # create a cursor
+            crsr = connection.cursor()
+            sqlStr = """
+            UPDATE room
+            SET roomNo = %s, area = %s
+            WHERE roomNo = %s
+            """
+            
+            # execute the data fetch SQL command along with the SQL placeholder values
+            crsr.execute(sqlStr, (request.POST['roomNo'], request.POST['area'], roomNo))
+            connection.commit()
+            crsr.close()
+            return redirect('main:create_room')
+        except(Exception, psycopg2.DatabaseError) as error:
+            print("something")
+            print(error)
+            messages.info(request, error.diag.message_primary)
+        finally:
+            if connection is not None:
+                connection.close()
+                print('Database connection terminated.')
+    return render(request, 'edit_room.html', {'roomNo' : roomNo, 'area': area})
+
 def manage_menu(request):
     connection = None
     try:
@@ -1189,14 +1264,14 @@ def manage_menu(request):
         crsr = connection.cursor()
         # sql command to be executed for fetching the data
         sqlStr = """
-        SELECT m.name, m.type
-        from menu m;
+        SELECT m.id, m.name, m.type
+        from menu m
+        order by m.type;
         """
 
         # execute the data fetch SQL command along with the SQL placeholder values
         crsr.execute(sqlStr)
         result = crsr.fetchall()
-        print(result)
         crsr.close()
     except(Exception, psycopg2.DatabaseError) as error:
         print(error)
@@ -1219,13 +1294,13 @@ def menu_form(request):
             sqlStr = """
             INSERT into menu VALUES (%s, %s, %s);
             """
-            menuID = uuid.uuid4()
+            id = uuid.uuid4()
             
             # execute the data fetch SQL command along with the SQL placeholder values
-            crsr.execute(sqlStr, (menuID, request.POST['MenuName'], request.POST['MenuType']))
+            crsr.execute(sqlStr, (id, request.POST['menuName'], request.POST['menuType']))
             connection.commit()
             crsr.close()
-            return redirect('main:activity.html')
+            return redirect('main:manage_menu')
         except(Exception, psycopg2.DatabaseError) as error:
             print("something")
             print(error)
@@ -1234,7 +1309,65 @@ def menu_form(request):
             if connection is not None:
                 connection.close()
                 print('Database connection terminated.')
+    
     return render(request, 'menu_form.html', {})
+
+
+def delete_menu(request, id):
+    connection = None
+    try:
+        params = config()
+        print('Connecting to the postgreSQL database ...')
+        connection = psycopg2.connect(**params)
+
+        # create a cursor
+        crsr = connection.cursor()
+        
+        # execute the data fetch SQL command along with the SQL placeholder values
+        crsr.execute("delete from menu where id=%s", (id,))
+        connection.commit()
+        crsr.close()
+    except(Exception, psycopg2.DatabaseError) as error:
+        print("something")
+        print(error)
+        messages.info(request, error.diag.message_primary)
+    finally:
+        if connection is not None:
+            connection.close()
+            print('Database connection terminated.')
+    return HttpResponseRedirect(reverse('main:manage_menu'))
+
+def edit_menu(request, id, name, type):
+    if request.method=="POST":
+        connection = None
+        try:
+            params = config()
+            print('Connecting to the postgreSQL database ...')
+            connection = psycopg2.connect(**params)
+
+            # create a cursor
+            crsr = connection.cursor()
+            sqlStr = """
+            UPDATE menu
+            SET name = %s, type = %s
+            WHERE id=%s;
+            """
+            
+            # execute the data fetch SQL command along with the SQL placeholder values
+            crsr.execute(sqlStr, (request.POST['menuName'], request.POST['menuType'], id))
+            connection.commit()
+            crsr.close()
+            return redirect('main:manage_menu')
+        except(Exception, psycopg2.DatabaseError) as error:
+            print("something")
+            print(error)
+            messages.info(request, error.diag.message_primary)
+        finally:
+            if connection is not None:
+                connection.close()
+                print('Database connection terminated.')
+    
+    return render(request, 'edit_menu.html', {'id': id, 'name':name, 'type':type})
 
 def room_form(request):
     if request.method=="POST":
@@ -1247,15 +1380,14 @@ def room_form(request):
             # create a cursor
             crsr = connection.cursor()
             sqlStr = """
-            INSERT into menu VALUES (%s, %s, %s);
+            INSERT into room VALUES (%s, %s);
             """
-            roomID = uuid.uuid4()
             
             # execute the data fetch SQL command along with the SQL placeholder values
-            crsr.execute(sqlStr, (roomID, request.POST['Roomnumber'], request.POST['Area']))
+            crsr.execute(sqlStr, (request.POST['roomNo'], request.POST['area']))
             connection.commit()
             crsr.close()
-            return redirect('main:activity.html')
+            return redirect('main:create_room')
         except(Exception, psycopg2.DatabaseError) as error:
             print("something")
             print(error)
@@ -1265,6 +1397,30 @@ def room_form(request):
                 connection.close()
                 print('Database connection terminated.')
     return render(request, 'room_form.html', {})
+
+def delete_room(request, roomNo):
+    connection = None
+    try:
+        params = config()
+        print('Connecting to the postgreSQL database ...')
+        connection = psycopg2.connect(**params)
+
+        # create a cursor
+        crsr = connection.cursor()
+        
+        # execute the data fetch SQL command along with the SQL placeholder values
+        crsr.execute("delete from room where roomNo=%s", (roomNo,))
+        connection.commit()
+        crsr.close()
+    except(Exception, psycopg2.DatabaseError) as error:
+        print("something")
+        print(error)
+        messages.info(request, error.diag.message_primary)
+    finally:
+        if connection is not None:
+            connection.close()
+            print('Database connection terminated.')
+    return HttpResponseRedirect(reverse('main:create_room'))
 
 def class_list(request):
     connection = None
@@ -1294,43 +1450,36 @@ def class_list(request):
             print('Database connection terminated.')
         return render(request, 'class_list.html', {'result': result})
         
-def children_class(request):
+def children_class(request, class_name, year):
     connection = None
     try:
         params = config()
-        print('Connecting to the postgreSQL database ...')
+        print('Connecting to the PostgreSQL database ...')
         connection = psycopg2.connect(**params)
-
-        # create a cursor
-        crsr1 = connection.cursor()
-        # sql command to be executed for fetching the data
-        sqlStr1 = """
-        select cl.classname, cl.year, cl.totalchildren
-        from class cl;
-        """
 
         crsr = connection.cursor()
         sqlStr = """
-        select U.firstname, U.lastname, DATE_PART('YEAR', AGE(CURRENT_DATE, U.birthdate)) as age, U.birthdate, e.type
-        from U, enrollment e
-        where U.userid = e.userid;
+        SELECT U.FirstName, U.LastName, DATE_PART('YEAR', AGE(CURRENT_DATE, U.BirthDate)) as age, U.BirthDate, e.Type
+        FROM U
+        INNER JOIN Enrollment e ON U.UserID = e.UserID
+        INNER JOIN Class cl ON e.ProgramID = cl.ProgramID
+        WHERE cl.ClassName = %s AND cl.Year = %s;
         """
 
-        # execute the data fetch SQL command along with the SQL placeholder values
-        crsr.execute(sqlStr)
+        crsr.execute(sqlStr, (class_name, year,))
         result = crsr.fetchall()
-        crsr1.execute(sqlStr1)
-        result1 = crsr.fetchall()
         print(result)
-        print(result1)
         crsr.close()
     except(Exception, psycopg2.DatabaseError) as error:
         print(error)
+        result = []
     finally:
         if connection is not None:
             connection.close()
             print('Database connection terminated.')
-        return render(request, 'children_class.html', {'result':result, 'result1':result1})
+        return render(request, 'children_class.html', {'class_name': class_name, 'year': year, 'result': result})
+
+
 
 def pickup_schedule(request):
     connection = None
@@ -1569,31 +1718,46 @@ def child_dailyreport(request):
             print('Database connection terminated.')
     return render(request, 'child_dailyreport.html', {'result': result})
 
+import psycopg2
+
 def daily_reportform(request):
-    if request.method=="POST":
+    if request.method == "POST":
         connection = None
         try:
             params = config()
-            print('Connecting to the postgreSQL database ...')
+            print('Connecting to the PostgreSQL database...')
             connection = psycopg2.connect(**params)
-
-            # create a cursor
             crsr = connection.cursor()
-            sqlStr = """
-            INSERT into menu VALUES (%s, %s, %s, %s, %s);
-            """
-            
-            # execute the data fetch SQL command along with the SQL placeholder values
-            crsr.execute(sqlStr, (request.POST['firstname'], request.POST['lastname'], request.POST['date'], request.POST['activityreport'], request.POST['eatingreport'], request.POST['photolink']))
-            connection.commit()
-            crsr.close()
-            return redirect('main:activity.html')
-        except(Exception, psycopg2.DatabaseError) as error:
-            print("something")
-            print(error)
-            messages.info(request, error.diag.message_primary)
-        finally:
-            if connection is not None:
+
+            # Fetch UserID based on childName
+            crsr.execute("SELECT UserID FROM U WHERE CONCAT(FirstName, ' ', LastName) = %s", (request.POST.get('childName'),))
+            user_id = crsr.fetchone()[0] if crsr.rowcount > 0 else None
+
+            if user_id:
+                sqlStr = """
+                INSERT INTO daily_report (UserID, Date, ActivityReport, EatingReport, Link)
+                VALUES (%s, %s, %s, %s, %s);
+                """
+                crsr.execute(sqlStr, (
+                    user_id,
+                    request.POST.get('date'),
+                    request.POST.get('activityReport'),
+                    request.POST.get('eatingReport'),
+                    request.POST.get('photoLink')
+                ))
+                
+                connection.commit()
+                crsr.close()
                 connection.close()
                 print('Database connection terminated.')
+                return redirect('main:daily_report_child', child_name=request.POST.get('childName'))
+            else:
+                raise Exception("User not found.")
+        except (Exception, psycopg2.DatabaseError) as error:
+            print("Something went wrong")
+            print(error)
+            messages.info(request, str(error))
     return render(request, 'daily_reportform.html', {})
+
+
+
